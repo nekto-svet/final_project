@@ -1,0 +1,86 @@
+[{"bookId":0,
+"state":
+{"0-1":{
+    "currId": "0-1",
+    "bgColor": "yellow",
+    "currText": "first",
+    "drawingHistory": {},
+    "isDrawing": false
+},
+"0-2":{
+    "currId": "0-2",
+    "bgColor": "yellow",
+    "currText": "second",
+    "drawingHistory": {},
+    "isDrawing": false
+},
+"0-3":{
+    "currId": "0-3",
+    "bgColor": "yellow",
+    "currText": "",
+    "drawingHistory": {},
+    "isDrawing": false
+},
+"0-4":{
+    "currId": "0-4",
+    "bgColor": "yellow",
+    "currText": "",
+    "drawingHistory": {},
+    "isDrawing": false
+},
+"0-5":{
+    "currId": "0-1",
+    "bgColor": "yellow",
+    "currText": "",
+    "drawingHistory": {},
+    "isDrawing": false
+},
+"0-6":{
+    "currId": "0-2",
+    "bgColor": "yellow",
+    "currText": "",
+    "drawingHistory": {},
+    "isDrawing": false
+},
+"0-7":{
+    "currId": "0-3",
+    "bgColor": "yellow",
+    "currText": "",
+    "drawingHistory": {},
+    "isDrawing": false
+},
+"0-8":{
+    "currId": "0-4",
+    "bgColor": "yellow",
+    "currText": "",
+    "drawingHistory": {},
+    "isDrawing": false
+},
+"0-9":{
+    "currId": "0-1",
+    "bgColor": "yellow",
+    "currText": "",
+    "drawingHistory": {},
+    "isDrawing": false
+},
+"0-10":{
+    "currId": "0-2",
+    "bgColor": "yellow",
+    "currText": "",
+    "drawingHistory": {},
+    "isDrawing": false
+},
+"0-11":{
+    "currId": "0-3",
+    "bgColor": "yellow",
+    "currText": "",
+    "drawingHistory": {},
+    "isDrawing": false
+},
+"0-12":{
+    "currId": "0-4",
+    "bgColor": "yellow",
+    "currText": "",
+    "drawingHistory": {},
+    "isDrawing": false
+}}}]

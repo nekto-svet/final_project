@@ -4,6 +4,7 @@ import path from 'path';
 const __dirname = path.resolve();
 import { 
     __getBook,
+    __getState,
 }  from '../models/books_models.js'
 
 // const getAllBooks = (req, res) => {
@@ -16,9 +17,9 @@ import {
 // }
 
 export const getBook = async(req, res) => {
-    const {id} = req.params;
+    const {bookId} = req.params;
     try{
-        const book = await __getBook(id);
+        const book = await __getBook(bookId);
         res.json(book);
     }
     catch (err){
@@ -34,12 +35,12 @@ const numberOfSentences = 5;
 // pages start from 1, not from 0
 
 export const getPage = async(req, res) => {
-    // console.log(req.params);
-    const {id, page} = req.params;
-    console.log(req.params)
+    console.log('params from getPage',req.params);
+    const {bookId, page} = req.params;
+    // console.log(req.params)
     let currentSentenses = [];
     try{
-        const response = await __getBook(id);
+        const response = await __getBook(bookId);
         const text = response.text;
         const sentences = text.split('.');
         console.log(sentences.length);
@@ -54,6 +55,43 @@ export const getPage = async(req, res) => {
         // const jsonText = JSON.stringify(pageText)
         // console.log(currText);
         res.send({currText});
+    }
+    catch (err){
+        console.log(err);
+        res.status(404).json({msg:'not found'})
+    }
+}
+
+
+// export const getState = async(req, res) => {
+//     const {bookId, page} = req.params;
+//     // console.log(req.params);
+//     // let currentSentenses = [];
+//     try{
+//         const response = await __getState(bookId);
+//         // console.log(response);
+//         // const state = response.state;
+//         const currState = response[`${bookId}-${page}`];
+//         console.log(currState);
+//         res.send({currState});
+//     }
+//     catch (err){
+//         console.log(err);
+//         res.status(404).json({msg:'not found'})
+//     }
+// }
+
+export const getState = async(req, res) => {
+    const {bookId} = req.params;
+    console.log('params from getState',req.params);
+    // let currentSentenses = [];
+    try{
+        const state = await __getState(bookId);
+        // console.log(response);
+        // const state = response.state;
+        // const currState = response[`${bookId}-${page}`];
+        // console.log(currState);
+        res.send({state});
     }
     catch (err){
         console.log(err);

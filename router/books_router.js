@@ -3,13 +3,15 @@ import express from 'express';
 import {
     getBook,
     getPage,
+    getState,
     saveImage
 } from '../controller/books_controller.js';
 
 const router = express.Router();
 
 
-router.get('/:id/:page', getPage);
+router.get('/text/:bookId/:page', getPage);
+router.get('/state/:bookId', getState);
 
 router.post('/saveImage', saveImage);
 

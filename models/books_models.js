@@ -11,10 +11,15 @@
 // module.exports = {__getAllProducts, __getProduct}
 
 import * as allBooks from './books.json' assert { type: 'json' };
+import * as allState from './state.json' assert { type: 'json' };
+// // console.log(allState.default[0].state['0-1']);
 
-
-export const __getBook = (id) => {
+export const __getBook = (bookId) => {
     // console.log(allBooks.default[id]);
-    return allBooks.default[id];
+    return allBooks.default[bookId];
 }
 
+export const __getState = (bookId) => {
+    console.log(allState.default[bookId].state)
+    return allState.default[bookId].state;
+}
