@@ -16,14 +16,20 @@ export const __getBook = (book_id) => {
 // export const __getPages = (book_id, page) => {
 //     return db('pages').select('page_number', 'text').where({book_id, page_number:page, page_number:page+1, page_number:page+2}) //page_number:page, page_number:page+1, page_number:page+2
 // }
-export const __getPages = (book_id, page) => {
-    const endPage = page + 2; 
+// export const __getPages = (book_id, page) => {
+//     const endPage = page + 2; 
+//     return db('pages')
+//       .select('page_number', 'text')
+//       .where('book_id', book_id)
+//       .andWhere('page_number', '>=', page)
+//       .orderBy('page_number', 'asc') // Ensure the pages are returned in order
+//       .limit(3); // Ensure only three rows are returned
+//   };
+  export const __getPages = (book_id, page) => {
     return db('pages')
       .select('page_number', 'text')
       .where('book_id', book_id)
-      .andWhere('page_number', '>=', page)
-      .orderBy('page_number', 'asc') // Ensure the pages are returned in order
-      .limit(3); // Ensure only three rows are returned
+      .andWhere('page_number', page)
   };
 
  export const __getCountOfPages = (book_id) => {
