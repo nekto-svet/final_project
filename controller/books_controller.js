@@ -78,6 +78,7 @@ export const getStyle = async(req, res) => {
 
 export const saveStyle = async(req, res) => {
     const { user_id, book_id, style } = req.body;
+    // console.log ('from save style', user_id, book_id, style)
     try{
         await __saveStyle(user_id, book_id, style);
         res.status(200).json({msg:'style updated successfully'});

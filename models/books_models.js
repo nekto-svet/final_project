@@ -1,9 +1,5 @@
-// const {db} = require ('../config/DB_conect.js');
-import db from '../config/DB_conect.js';
 
-// const __getAllProducts = () => {
-//     return db('products').select('product_id', 'product_name', 'price', 'description').orderBy('product_name');
-// }
+import db from '../config/DB_conect.js';
 
 export const __getAllBooks = () => {
     return db('books').select('book_id', 'title', 'author', 'year', 'cover_img'); 
@@ -25,6 +21,7 @@ export const __getBook = (book_id) => {
 //       .orderBy('page_number', 'asc') // Ensure the pages are returned in order
 //       .limit(3); // Ensure only three rows are returned
 //   };
+
   export const __getPages = (book_id, page) => {
     return db('pages')
       .select('page_number', 'text')
@@ -45,11 +42,24 @@ export const __getStyle = (user_id, book_id) => {
     .andWhere({ user_id })
 }
 
+// export const __saveStyle = (user_id, book_id, style) => {
+//     return db('style')
+//         .insert({ user_id, book_id, style: JSON.stringify(style) }) 
+//         .onConflict(['user_id', 'book_id']) 
+//         .merge({ style: JSON.stringify(style) }) 
+// };
 export const __saveStyle = (user_id, book_id, style) => {
     return db('style')
-        .insert({ user_id, book_id, style: JSON.stringify(style) }) 
-        .onConflict(['user_id', 'book_id']) 
-        .merge({ style: JSON.stringify(style) }) 
+        .insert({
+            user_id, 
+            book_id, 
+            style
+        })
+        .onConflict(['user_id', 'book_id'])
+        .merge({
+            style
+        })
+        .returning("*");
 };
 
 // // import * as allBooks from './books.json' assert { type: 'json' };
