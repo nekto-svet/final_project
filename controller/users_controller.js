@@ -3,8 +3,8 @@ import { _registerNewUser } from "../models/user_modeles.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+// import Cookies from "cookies";
 dotenv.config();
-
 export const registerNewUser = async(req, res) => {
     const { username, email, first_name, last_name, password } = req.body;
     const lowerEmail = email.toLowerCase();
@@ -44,10 +44,21 @@ export const login = async(req, res) => {
         const secret = process.env.ACSESS_TOKEN_SECRET;
         const acsesstoken = jwt.sign({user_id, user_email}, secret, {expiresIn:'5d'});
         console.log ('from users controller', acsesstoken);
+        // const cookies = new Cookies(req, res)
+        // cookies.set('token', acsesstoken, {
+        //     maxAge: 5 * 24 * 60 * 60 * 1000, 
+        //     httpOnly: true,
+        //     // sameSite: 'None',
+        //     // secure: true,
+        // })
         res.cookie('token', acsesstoken, {
             maxAge: 5 * 24 * 60 * 60 * 1000, 
             httpOnly: true,
+            sameSite: 'None',
+            secure: true,
         });
+
+        // console.log('from users_controller req.cookies', req.cookies.token);
         res.json({token:acsesstoken, user_id});
 
     } catch(err){
