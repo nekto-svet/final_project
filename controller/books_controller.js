@@ -67,7 +67,7 @@ export const getCountOfPages = async(req, res) => {
 export const getStyle = async(req, res) => {
     const {bookId, user_id} = req.params;
     try{
-        const style = await __getStyle(bookId, user_id);
+        const style = await __getStyle(user_id, bookId);
         res.json(style);
     }
     catch (err){

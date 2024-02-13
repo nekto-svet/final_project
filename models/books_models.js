@@ -42,12 +42,7 @@ export const __getStyle = (user_id, book_id) => {
     .andWhere({ user_id })
 }
 
-// export const __saveStyle = (user_id, book_id, style) => {
-//     return db('style')
-//         .insert({ user_id, book_id, style: JSON.stringify(style) }) 
-//         .onConflict(['user_id', 'book_id']) 
-//         .merge({ style: JSON.stringify(style) }) 
-// };
+
 export const __saveStyle = (user_id, book_id, style) => {
     return db('style')
         .insert({
