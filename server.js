@@ -6,8 +6,12 @@ import users_router from './router/users_router.js'
 import cookieParser from "cookie-parser";
 dotenv.config();
 import * as path from 'path';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 console.log (path);
-const __dirname = 'https://interactive-reader.onrender.com';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 app.use(cors()); //{origin:'http://localhost:3000', credentials:true}
@@ -31,10 +35,14 @@ app.use('/', users_router);
 app.use('/books', books_router);
 app.use('/images', express.static('images'));
 
-
-app.use(express.static(path.join(__dirname, "/client/build")));
-
+app.use(express.static(join(__dirname, "client/build")));
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+  res.sendFile(join(__dirname, "client/build", "index.html"));
 });
+
+// app.use(express.static(path.join(__dirname, "/client/build")));
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+// });
 
