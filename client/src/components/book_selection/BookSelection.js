@@ -10,7 +10,7 @@ const BookSelection = () => {
 
     const fetchAllBooks = async() => {
         try {
-            const res = await axios.get('http://localhost:3001/books/all_books' || `//books/all_books`);
+            const res = await axios.get('http://localhost:3001/books/all_books' || `/books/all_books`);
             setAllBooks(res.data);
         } catch (err) {
             console.log(err);
