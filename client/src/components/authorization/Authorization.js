@@ -13,53 +13,54 @@ const Authorization = (props) => {
     const [redirect, setRedirect] = useState(false);
     const { token, setToken } = useContext(AuthContext);
 
-    
-    useEffect(() => {
-        const test = async() => {
-            const storedToken = await getTokenFromCookies();
-            console.log('storedToken', storedToken)
-            if (storedToken) {
-                setToken(storedToken);
-                verify(storedToken); 
-            } else {
-                verify(token);
-            }
-        };
-        test();
+    //
+    // useEffect(() => {
+    //     const test = async() => {
+    //         const storedToken = await getToken();
+    //         console.log('storedToken', storedToken)
+    //         if (storedToken) {
+    //             setToken(storedToken);
+    //             verify(storedToken); 
+    //         } else {
+    //             verify(token);
+    //         }
+    //     };
+    //     test();
         
-    }, []);
-
-    // useEffect(()=> {
-    //     const storedToken = localStorage.getItem('token');
-    //     if (storedToken){
-    //         verify(storedToken);
-    //     } else verify(token)
     // }, []);
 
-    
-    const getTokenFromCookies = async () => {
-        try {
-            const res = await axios.get('http://localhost:3001/token', {
-                withCredentials:true,
+    useEffect(()=> {
+        const storedToken = localStorage.getItem('token');
+        if (storedToken){
+            verify(storedToken);
+        } else verify(token)
+    }, []);
 
-            });
-            if (res.status === 200) {
-                console.log ('from get token',res.data);
-                // setRedirect(true);
-                return res.data
-            } else {
-                // navigate('/login');
-            }
-        } catch (error) {
-            console.log('error from get token',error)
-            // navigate('/login');
-        }
-    }
+    
+    // const getToken = async (token) => {
+    //     try {
+    //         const res = await axios.get('http://localhost:3001/token', {
+    //             withCredentials:true,
+
+    //         });
+    //         if (res.status === 200) {
+    //             console.log ('from get token',res.data);
+    //             // setRedirect(true);
+    //             return res.data
+    //         } else {
+    //             // navigate('/login');
+    //         }
+    //     } catch (error) {
+    //         console.log('error from get token',error)
+    //         // navigate('/login');
+    //     }
+    // }
 
     
     const verify = async (tokenToVerify) => {
         try {
-            const res = await axios.get('http://localhost:3001/verify' || `/verify`, {
+            // 'http://localhost:3001/verify' ||
+            const res = await axios.get( `/verify`, {
                 headers: {
                     "x-access-token": tokenToVerify,
                     'Access-Control-Allow-Origin': '*', 
