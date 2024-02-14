@@ -13,33 +13,56 @@ const Canvas = () => {
     const dispatch = useDispatch();
 
     const params = useParams();
-    let bookId = params.bookId;
-    let page = params.page;
+    const bookId = params.bookId;
+    const page = params.page;
     const curr_id = `${bookId}-${page}`;
 
     const canvasRef = useRef(null);
-    // const [canvasSize, setCanvasSize] = useState({ width: window.innerWidth * 0.7, height: (width / 4) * 3 });
-    
 
     const state = useSelector(state => state.interactions);
     const currStyle = state.style[page];
-    const savedDrawing = currStyle?currStyle.drawingHistory:'';
+    
     // console.log('style from canvas', state);
     // console.log('currStyle from canvas', currStyle);
     const [isDrawing, setIsDrawing] = useState(false);
+    const savedDrawing = currStyle?currStyle.drawingHistory:null;
     const currStrokeColor = state.style.length == 0? 'black' : state.style[page].strokeColor;
     const currStrokeWidth = state.style.length == 0? 1 : state.style[page].strokeWidth;
 
+    const updateCanvasSize = () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const context = canvas.getContext('2d');
+
+        const savedContent = canvas.toDataURL();
+
+        const width = Math.max(window.innerWidth * 0.7, 600); 
+        const height = (width * 3) / 4; 
+        canvas.width = width;
+        canvas.height = height;
+
+        base64ToCanvas(canvas, savedContent);
+    };
+
+    //  resize and setup event listener for future resizes
+    // useEffect(() => {
+    //     updateCanvasSize();
+    //     window.addEventListener("resize", updateCanvasSize);
+
+    //     return () => window.removeEventListener("resize", updateCanvasSize);
+    // }, []);
+
+        
      // restore previous drowing on a canvas
     useEffect(() => {
         // console.log('restore prev drawing from canvas');
         const canvas = canvasRef.current;
-        if (!canvas) return; // Ensure canvas exists
+        if (!canvas) return; 
         const context = canvas.getContext("2d");
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         // const savedDrawing = currStyle?currStyle.drawingHistory:null;
-        console.log('savedDrawing from canvas', savedDrawing);
+        // console.log('savedDrawing from canvas', savedDrawing);
         if (savedDrawing) {
         base64ToCanvas(canvas, savedDrawing);
         }
@@ -96,7 +119,7 @@ const Canvas = () => {
         canvas.removeEventListener("mouseup", stopDrawing);
         canvas.removeEventListener("mouseout", stopDrawing);
         };
-    }, [currStrokeColor, currStrokeWidth,isDrawing, params]);
+    }, [currStrokeColor, currStrokeWidth,isDrawing, params, currStyle]);
 
 
      //function to convert image data to to a Data URL (Base64)
@@ -110,7 +133,7 @@ const Canvas = () => {
     function base64ToCanvas(canvas, base64Image) {
         const context = canvas.getContext("2d");
         const image = new Image();
-        console.log ('from base64ToCanvas');
+        // console.log ('from base64ToCanvas context', context, 'image', image);
         image.onload = function() {
             context.drawImage(image, 0, 0, canvas.width, canvas.height);
         };
