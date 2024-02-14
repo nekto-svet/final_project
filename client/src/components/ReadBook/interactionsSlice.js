@@ -9,6 +9,7 @@ import axios from "axios";
     try {
         const res = await axios.get(`http://localhost:3001/books/style/${bookId}/${user_id}`);
         if (!res.data[0].style) return res.data;
+        // console.log('fetchStyle', res.data[0].style);
         return res.data[0].style;
     } catch (err) {
         console.log(err);

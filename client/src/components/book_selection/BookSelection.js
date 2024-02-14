@@ -16,10 +16,8 @@ const BookSelection = () => {
             console.log(err);
           }
       };
-      //
 
     useEffect(() => {
-        console.log('hi i am use effect from select')
         fetchAllBooks();
     }, [])
 

@@ -21,24 +21,29 @@ const Canvas = () => {
 
     const state = useSelector(state => state.interactions);
     const currStyle = state.style[page];
-    console.log(state);
+    const savedDrawing = currStyle?currStyle.drawingHistory:null;
+    // console.log('style from canvas', state);
+    // console.log('currStyle from canvas', currStyle);
     const [isDrawing, setIsDrawing] = useState(false);
     const currStrokeColor = state.style.length == 0? 'black' : state.style[page].strokeColor;
     const currStrokeWidth = state.style.length == 0? 1 : state.style[page].strokeWidth;
 
      // restore previous drowing on a canvas
     useEffect(() => {
+        // console.log('restore prev drawing from canvas');
         const canvas = canvasRef.current;
         if (!canvas) return; // Ensure canvas exists
         const context = canvas.getContext("2d");
         context.clearRect(0, 0, canvas.width, canvas.height);
-    
-        const savedDrawing = currStyle?currStyle.drawingHistory:null;
+
+        // const savedDrawing = currStyle?currStyle.drawingHistory:null;
+        // console.log('savedDrawing from canvas', savedDrawing);
         if (savedDrawing) {
         base64ToCanvas(canvas, savedDrawing);
         }
     
-    }, [params]); 
+    }, [bookId, page, base64ToCanvas]); 
+    
 
      //  DRAW
     useEffect(() => {
@@ -102,11 +107,10 @@ const Canvas = () => {
     //function to get back image info from base64
     function base64ToCanvas(canvas, base64Image) {
         const context = canvas.getContext("2d");
-        // a new Image instance
         const image = new Image();
-        
+        // console.log ('from base64ToCanvas context', context, 'image', image);
         image.onload = function() {
-        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
         };
     
         image.src = base64Image;

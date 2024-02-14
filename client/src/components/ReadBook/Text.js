@@ -11,7 +11,7 @@ import {
 } from "./pagesSlise";
 import Canvas from "./Canvas/Canvas";
 
-//
+
 const Text = () => {
 
     const params = useParams();
@@ -19,7 +19,7 @@ const Text = () => {
     let page = params.page;
 
     const user_id = localStorage.getItem('user_id');
-    console.log ('from text user_id', user_id);
+    // console.log ('from text user_id', user_id);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -33,32 +33,11 @@ const Text = () => {
 
 
     useEffect  (() => {
-        dispatch(fetchText({ bookId, page })).then(() => {
-        });
+        // console.log('useEffect from Text');
+        dispatch(fetchText({ bookId, page }));
     },[bookId, page]);
 
-    
 
-    // const postStyle = async () => {
-    //     console.log('post style');
-    //     console.log('from postStyle style', interactionsState.style);
-    //     let stringifiedStyle = JSON.stringify(interactionsState.style);
-    //     console.log('from post string style', stringifiedStyle)
-    //     try {
-    //         const res = await axios.post('http://localhost:3001/books/style', 
-    //             { user_id, book_id: bookId, style:stringifiedStyle },
-    //             {
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                 },
-    //             }
-    //         );
-    //         console.log (res.data);
-    //         return res.data;
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
 
     const handleSaveSlyle = () => {
         let stringifiedStyle = JSON.stringify(interactionsState.style);

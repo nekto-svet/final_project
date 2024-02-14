@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams} from "react-router-dom";
 import { fetchBookData } from '../pagesSlise';
+import { postStyle } from "../interactionsSlice";
 import { useEffect } from "react";
 import Canvas from "../Canvas/Canvas";
 
@@ -20,9 +21,14 @@ const TitlePage = () => {
     const currBookInfo = pagesState.bookData;
 
 
+    const user_id = localStorage.getItem('user_id');
+    // console.log ('from text user_id', user_id);
+
+
     
     // fetches info about book for display it on a title page
     useEffect (() => {
+        // console.log ('mount TitlePage')
         dispatch(fetchBookData({book_id}))
     }, []);
 
