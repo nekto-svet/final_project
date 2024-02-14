@@ -5,12 +5,12 @@ import books_router from'./router/books_router.js';
 import users_router from './router/users_router.js'
 import cookieParser from "cookie-parser";
 dotenv.config();
-import path from 'path';
+import * as path from 'path';
 console.log (path);
 const __dirname = 'https://interactive-reader.onrender.com';
 
 const app = express();
-app.use(cors({origin:'http://localhost:3000', credentials:true}));
+app.use(cors()); //{origin:'http://localhost:3000', credentials:true}
 
 app.use(express.json({ limit: '100mb' }));
 
