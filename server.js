@@ -5,6 +5,8 @@ import books_router from'./router/books_router.js';
 import users_router from './router/users_router.js'
 import cookieParser from "cookie-parser";
 dotenv.config();
+import path from 'path';
+console.log (path);
 
 const app = express();
 app.use(cors({origin:'http://localhost:3000', credentials:true}));
@@ -27,3 +29,8 @@ app.listen(process.env.PORT || 3001, ()=> {
 app.use('/', users_router);
 app.use('/books', books_router);
 app.use('/images', express.static('images'));
+
+// app.use(express.static(path.join(__dirname, "/client/build")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+// });

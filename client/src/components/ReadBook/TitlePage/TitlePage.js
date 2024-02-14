@@ -16,7 +16,7 @@ const TitlePage = () => {
 
     const interactionsState = useSelector(state => state.interactions);
     const currStyle = interactionsState.style[page];
-    console.log ('from Title currStyle', currStyle);
+    console.log ('from Text currStyle', currStyle);
 
     const pagesState = useSelector(state => state.pages);
     const currBookInfo = pagesState.bookData;
