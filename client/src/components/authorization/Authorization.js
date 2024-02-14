@@ -59,7 +59,8 @@ const Authorization = (props) => {
     
     const verify = async (tokenToVerify) => {
         try {
-            const res = await axios.get('http://localhost:3001/verify' || `https://childrens-interactive-reader.onrender.com/verify`, {
+            //'http://localhost:3001/verify' ||
+            const res = await axios.get( `https://childrens-interactive-reader.onrender.com/verify`, {
                 headers: {
                     "x-access-token": tokenToVerify,
                     'Access-Control-Allow-Origin': '*', 
