@@ -14,8 +14,9 @@ const Login = ({action}) => {
     const navigate = useNavigate();
 
     const login = async() => {
+        // 'http://localhost:3001/login' || 
         try{
-            const response = await axios.post('/login' || 'http://localhost:3001/login', {
+            const response = await axios.post('/login'  , {
                 email, password 
             });
             if (response.status === 200) {

@@ -40,12 +40,30 @@ const Text = () => {
     },[bookId, page]);
 
 
-    const splitedText = text.split('\\n');
-    // const backToString = `\t` + changedText.join(`\n \t`);
-    // console.log (changedText);
+    // const splitedText = text.split('\\n');
+  
+    const targetWords = ['farmer', 'three little pigs', 'little pig', 'bad wolf'];
 
+    const handleWordClick = (word) => {
+        console.log(`Clicked word: ${word}`);
+    };
 
-
+    const renderText = () => {
+        const regex = new RegExp(`(${targetWords.join('|')})`, 'gi');
+        const parts = text.split(regex);
+    
+        return parts.map((part, index) => {
+          if (targetWords.includes(part.toLowerCase())) {
+            return (
+              <span key={index} onClick={() => handleWordClick(part)} style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}>
+                {part}
+              </span>
+            );
+          } else {
+            return <span key={index}>{part}</span>;
+          }
+        });
+      };
 
     const handleSaveSlyle = () => {
         let stringifiedStyle = JSON.stringify(interactionsState.style);
@@ -67,14 +85,17 @@ const Text = () => {
             width: '400px',
             textAlign:'left',
             }
-            }>{splitedText.map((paragraph) => {
+            }>
+                {/* {splitedText.map((paragraph) => {
                 return (
                     <>
                     <div>{paragraph}</div>
                     <br/>
                     </>
                 )
-            })}</div>
+            })} */}
+            {renderText(text)}
+            </div>
         <br />
         <button onClick={() => dispatch(change_bg_color({page, color:'blue'}))}>Blue</button>
         <button onClick={handleSaveSlyle}>Save Changes</button>
@@ -92,6 +113,6 @@ export default Text;
 
 
 // advice
-
+//Make text another element
 // Consider abstracting the canvas drawing logic into a custom hook (useCanvasDrawing for example) to clean up the component and make the logic reusable.
 

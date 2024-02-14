@@ -6,6 +6,8 @@ import { AuthContext } from "../../App";
 
 
 
+
+
 const Authorization = (props) => {
 
 
@@ -58,9 +60,9 @@ const Authorization = (props) => {
 
     
     const verify = async (tokenToVerify) => {
+        //'http://localhost:3001/verify' || 
         try {
-            // 'http://localhost:3001/verify' ||
-            const res = await axios.get( `https://childrens-interactive-reader.onrender.com/verify`, {
+            const res = await axios.get(`/verify`, {
                 headers: {
                     "x-access-token": tokenToVerify,
                     'Access-Control-Allow-Origin': '*', 

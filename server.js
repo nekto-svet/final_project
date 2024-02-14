@@ -8,13 +8,13 @@ dotenv.config();
 import * as path from 'path';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-console.log (path);
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-app.use(cors()); //{origin:'http://localhost:3000', credentials:true}
+// app.use(cors('http://localhost:3001')); //{origin:'http://localhost:3000', credentials:true}
 
 app.use(express.json({ limit: '100mb' }));
 
