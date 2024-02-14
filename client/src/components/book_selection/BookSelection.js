@@ -9,8 +9,9 @@ const BookSelection = () => {
     const user_id = localStorage.getItem('user_id');
 
     const fetchAllBooks = async() => {
+        // || 'http://localhost:3001/books/all_books'
         try {
-            const res = await axios.get(`https://childrens-interactive-reader.onrender.com/books/all_books` || 'http://localhost:3001/books/all_books');
+            const res = await axios.get(`https://childrens-interactive-reader.onrender.com/books/all_books`);
             setAllBooks(res.data);
         } catch (err) {
             console.log(err);
