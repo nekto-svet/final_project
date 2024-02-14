@@ -19,7 +19,7 @@ const Registration = () => {
     const registration = async() => {
         
         try{
-            const response = await axios.post('http://localhost:3001/register', {
+            const response = await axios.post( `/register`  ||  'http://localhost:3001/register', {
                 username, email, first_name, last_name, password
             });
             if (response.status === 200) {

@@ -15,7 +15,7 @@ const Login = ({action}) => {
 
     const login = async() => {
         try{
-            const response = await axios.post('http://localhost:3001/login', {
+            const response = await axios.post('/login' || 'http://localhost:3001/login', {
                 email, password 
             });
             if (response.status === 200) {

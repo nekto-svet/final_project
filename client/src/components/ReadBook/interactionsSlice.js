@@ -7,7 +7,7 @@ import axios from "axios";
     const bookId = payload.bookId;
     const user_id = payload.user_id;
     try {
-        const res = await axios.get(`http://localhost:3001/books/style/${bookId}/${user_id}`);
+        const res = await axios.get(`http://localhost:3001/books/style/${bookId}/${user_id}` || `/books/style/${bookId}/${user_id}`);
         if (!res.data[0].style) return res.data;
         // console.log('fetchStyle', res.data[0].style);
         return res.data[0].style;
@@ -19,7 +19,7 @@ import axios from "axios";
   export const postStyle = createAsyncThunk('interactions/postStyle', async (payload) => {
     const {user_id, book_id, style} = payload;
     try {
-        const res = await axios.post('http://localhost:3001/books/style', 
+        const res = await axios.post('http://localhost:3001/books/style' || `/books/style`, 
             { user_id, book_id, style },
             {
                 headers: {

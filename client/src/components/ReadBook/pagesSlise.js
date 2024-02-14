@@ -5,7 +5,7 @@ import axios from "axios";
  export const fetchText = createAsyncThunk('pages/fetchText', async (payload) => {
   
     try {
-        const res = await axios.get(`http://localhost:3001/books/text/${payload.bookId}/${payload.page}`);
+        const res = await axios.get(`http://localhost:3001/books/text/${payload.bookId}/${payload.page}` || `/books/text/${payload.bookId}/${payload.page}`);
         // console.log ('from fetchText', res.data[0].text);
         // console.log (typeof res.data[0].text);
         // const text = res.data[0].text;
@@ -21,7 +21,7 @@ import axios from "axios";
   export const fetchBookData = createAsyncThunk('pages/fetchBookInfo', async (payload) => {
     try {
         const book_id = payload.book_id;
-        const res = await axios.get(`http://localhost:3001/books/${book_id}`);
+        const res = await axios.get(`http://localhost:3001/books/${book_id}` || `/books/${book_id}`);
        return res.data;
     } catch (err) {
         console.log(err);
@@ -30,7 +30,7 @@ import axios from "axios";
 
 export  const fetchNumberOfPages = createAsyncThunk('pages/fetchNumberOfPages', async (payload) => {
     try {
-        const res = await axios.get(`http://localhost:3001/books/pages/${payload}`);
+        const res = await axios.get(`http://localhost:3001/books/pages/${payload}` || `/books/pages/${payload}`);
         return res.data[0].count;
     } catch (err) {
         console.log(err);
