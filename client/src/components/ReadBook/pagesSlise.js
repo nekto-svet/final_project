@@ -6,6 +6,12 @@ import axios from "axios";
   
     try {
         const res = await axios.get(`http://localhost:3001/books/text/${payload.bookId}/${payload.page}`);
+        // console.log ('from fetchText', res.data[0].text);
+        // console.log (typeof res.data[0].text);
+        // const text = res.data[0].text;
+        // const changedText = text.split('\\n');
+        // const backToString = `\t` + changedText.join(`\n \t`);
+        // console.log ('backToString', backToString);
         return res.data[0].text;
     } catch (err) {
         console.log(err);
@@ -50,6 +56,7 @@ const pagesSlice = createSlice({
           })
           .addCase(fetchText.fulfilled, (state, action) => {
             state.status = 'succeeded';
+            console.log ('from .addCase(fetchText.fulfilled)', action.payload);
             state.text = action.payload;
           })
           .addCase(fetchText.rejected, (state, action) => {

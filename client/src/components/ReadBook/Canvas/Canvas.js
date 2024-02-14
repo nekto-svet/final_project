@@ -18,10 +18,12 @@ const Canvas = () => {
     const curr_id = `${bookId}-${page}`;
 
     const canvasRef = useRef(null);
+    // const [canvasSize, setCanvasSize] = useState({ width: window.innerWidth * 0.7, height: (width / 4) * 3 });
+    
 
     const state = useSelector(state => state.interactions);
     const currStyle = state.style[page];
-    const savedDrawing = currStyle?currStyle.drawingHistory:null;
+    const savedDrawing = currStyle?currStyle.drawingHistory:'';
     // console.log('style from canvas', state);
     // console.log('currStyle from canvas', currStyle);
     const [isDrawing, setIsDrawing] = useState(false);
@@ -37,7 +39,7 @@ const Canvas = () => {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         // const savedDrawing = currStyle?currStyle.drawingHistory:null;
-        // console.log('savedDrawing from canvas', savedDrawing);
+        console.log('savedDrawing from canvas', savedDrawing);
         if (savedDrawing) {
         base64ToCanvas(canvas, savedDrawing);
         }
@@ -108,7 +110,7 @@ const Canvas = () => {
     function base64ToCanvas(canvas, base64Image) {
         const context = canvas.getContext("2d");
         const image = new Image();
-        // console.log ('from base64ToCanvas context', context, 'image', image);
+        console.log ('from base64ToCanvas');
         image.onload = function() {
             context.drawImage(image, 0, 0, canvas.width, canvas.height);
         };
@@ -119,7 +121,7 @@ const Canvas = () => {
  
     return (
         <>
-        <canvas ref={canvasRef} width={800} height={400} style={{ border: "1px solid #000",}} />
+        <canvas ref={canvasRef} width={800} height={600} style={{ border: "1px solid #000",}} />
         <div>
         <CirclePicker color={currStrokeColor} onChangeComplete={(color) => dispatch(change_stroke_color({page, color: color.hex}))} />
         {/* <p>Selected Color: {currStrokeColor}</p> */}

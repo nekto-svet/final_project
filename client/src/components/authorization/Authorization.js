@@ -1,42 +1,9 @@
 
-
-// import { useContext, useEffect, useState } from "react";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-// import { AuthContext } from "../App";
-
-// const Authorization = (props) => {
-//     const [redirect, setRedirect] = useState(false);
-//     const {token, setToken} = useContext(AuthContext)
-
-//     useEffect(() => {
-//         verify();
-//     }, [])
-
-//     const verify = async () => {
-//         try {
-//             const res = await axios.get('http://localhost:3001/verify', {
-//                 headers:{
-//                     "x-access-token":token
-//                 }
-//             });
-//             if(res.status === 200) setRedirect(true);
-//         } catch (error) {
-//             setRedirect(false);
-//         }
-//     }
-
-//     return redirect? props.children : <>not authorized</>
-
-// }
-
-// export default Authorization;
-
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
-
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 const Authorization = (props) => {
     const navigate = useNavigate();
     const [redirect, setRedirect] = useState(false);

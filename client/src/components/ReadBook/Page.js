@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch }  from 'react-redux';
 import { 
   fetchStyle,
   create_new_style,
+  postStyle,
 } from "./interactionsSlice";
 
 import { fetchNumberOfPages } from "./pagesSlise";
@@ -20,6 +21,9 @@ const Page = () => {
  
   const user_id = localStorage.getItem('user_id');
 
+  const interactionsState = useSelector(state => state.interactions);
+  console.log('all style from page', interactionsState);
+
   const dispatch = useDispatch();
 
 
@@ -35,7 +39,13 @@ const Page = () => {
       });
       
     });
-  }, []); 
+
+    // return () => {;
+    //   console.log('a am living a page');
+    //   let stringifiedStyle = JSON.stringify(interactionsState.style);
+    //   dispatch(postStyle({user_id, book_id:bookId, style:stringifiedStyle}));
+    // };
+  }, []);
 
 
   if (page == 0) {

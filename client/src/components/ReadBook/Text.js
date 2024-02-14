@@ -4,7 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import {useSelector, useDispatch}  from 'react-redux';
 import { 
     change_bg_color,
-    postStyle
+    postStyle,
+    delete_drawing_history
 } from "./interactionsSlice";
 import { 
     fetchText, 
@@ -30,12 +31,19 @@ const Text = () => {
 
     const pageState = useSelector(state => state.pages);
     const text = pageState.text;
+    // console.log (text)
 
 
     useEffect  (() => {
         // console.log('useEffect from Text');
-        dispatch(fetchText({ bookId, page }));
+        dispatch(fetchText({ bookId, page }))
     },[bookId, page]);
+
+
+    const splitedText = text.split('\\n');
+    // const backToString = `\t` + changedText.join(`\n \t`);
+    // console.log (changedText);
+
 
 
 
@@ -56,11 +64,21 @@ const Text = () => {
             zIndex: '1',
             top: '200px', left: '50%',
             transform: 'translateX(-50%)',
-            width: '400px' }
-            }>{text}</div>
+            width: '400px',
+            textAlign:'left',
+            }
+            }>{splitedText.map((paragraph) => {
+                return (
+                    <>
+                    <div>{paragraph}</div>
+                    <br/>
+                    </>
+                )
+            })}</div>
         <br />
         <button onClick={() => dispatch(change_bg_color({page, color:'blue'}))}>Blue</button>
         <button onClick={handleSaveSlyle}>Save Changes</button>
+        <button onClick={() => dispatch(delete_drawing_history(page))}>Remove Drawing</button>
         <div>
             <button onClick={() => navigate(`/book/${bookId}/${+page - 1}`)}>Previous Page</button>
             <button onClick={() => navigate(`/book/${bookId}/${+page + 1}`)}>Next Page</button>

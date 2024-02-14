@@ -57,10 +57,9 @@ const interactionsSlice = createSlice({
           const index = action.payload.page;
           const width = action.payload.width;
           state.style[index].strokeWidth = width;
-      },
+        },
         save_drawing_history: (state, action) => {
             const index = action.payload.page;
-            const id = action.payload.currId;
             const imageData = action.payload.imageData;
             state.style[index].drawingHistory = imageData;
         },
@@ -75,6 +74,10 @@ const interactionsSlice = createSlice({
             };
             state.style = new_style;
         },
+        delete_drawing_history: (state, action) => {
+          const index = action.payload;
+          state.style[index].drawingHistory = '';
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -112,6 +115,7 @@ export const {
     change_stroke_width,
     save_drawing_history,
     create_new_style,
+    delete_drawing_history,
 } = interactionsSlice.actions;
 
 export default interactionsSlice.reducer;

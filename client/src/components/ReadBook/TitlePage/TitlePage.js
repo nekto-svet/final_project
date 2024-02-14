@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams} from "react-router-dom";
 import { fetchBookData } from '../pagesSlise';
-import { postStyle } from "../interactionsSlice";
+import { postStyle, delete_drawing_history } from "../interactionsSlice";
 import { useEffect } from "react";
 import Canvas from "../Canvas/Canvas";
 
@@ -16,6 +16,7 @@ const TitlePage = () => {
 
     const interactionsState = useSelector(state => state.interactions);
     const currStyle = interactionsState.style[page];
+    console.log ('from Title currStyle', currStyle);
 
     const pagesState = useSelector(state => state.pages);
     const currBookInfo = pagesState.bookData;
@@ -39,6 +40,7 @@ const TitlePage = () => {
             <div>Welcome to the book "{currBookInfo.title}"!</div>
             <div><button onClick={() => navigate(`/book/${book_id}/1`)}>Read from the beginning!</button></div>
             <Canvas/>
+            <button onClick={() => dispatch(delete_drawing_history(page))}>Remove Drawing</button>
         </div>
     )
 }
