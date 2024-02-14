@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 import path from 'path';
 console.log (path);
-const __dirname = 'https://interactive-reader.onrender.com/';
+const __dirname = 'https://interactive-reader.onrender.com';
 
 const app = express();
 app.use(cors({origin:'http://localhost:3000', credentials:true}));
