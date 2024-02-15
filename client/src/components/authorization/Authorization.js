@@ -3,14 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
-
-
-
-
+const baseURL = process.env.REACT_APP_BASE_URL || '';
+axios.defaults.withCredentials = true; 
 
 const Authorization = (props) => {
-
-
     const navigate = useNavigate();
     const [redirect, setRedirect] = useState(false);
     const { token, setToken } = useContext(AuthContext);
@@ -60,9 +56,9 @@ const Authorization = (props) => {
 
     
     const verify = async (tokenToVerify) => {
-        //'http://localhost:3001/verify' || 
+        
         try {
-            const res = await axios.get(`/verify`, {
+            const res = await axios.get(`${baseURL}/verify`, {
                 headers: {
                     "x-access-token": tokenToVerify,
                     'Access-Control-Allow-Origin': '*', 

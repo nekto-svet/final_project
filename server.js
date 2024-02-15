@@ -14,7 +14,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-// app.use(cors('http://localhost:3001')); //{origin:'http://localhost:3000', credentials:true}
+
+app.use(cors({
+  origin: 'http://localhost:3000', 
+  credentials: true, 
+})); 
 
 app.use(express.json({ limit: '100mb' }));
 
@@ -40,9 +44,5 @@ app.get("*", (req, res) => {
   res.sendFile(join(__dirname, "client/build", "index.html"));
 });
 
-// app.use(express.static(path.join(__dirname, "/client/build")));
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-// });
 

@@ -2,8 +2,9 @@ import {useState, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../App';
+const baseURL = process.env.REACT_APP_BASE_URL || '';
+axios.defaults.withCredentials = true; 
 
-//
 const Login = ({action}) => {
 
     const [email, setEmail] = useState();
@@ -14,9 +15,8 @@ const Login = ({action}) => {
     const navigate = useNavigate();
 
     const login = async() => {
-        // 'http://localhost:3001/login' || 
         try{
-            const response = await axios.post('/login'  , {
+            const response = await axios.post(`${baseURL}/login`  , {
                 email, password 
             });
             if (response.status === 200) {

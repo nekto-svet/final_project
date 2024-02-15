@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+const baseURL = process.env.REACT_APP_BASE_URL || '';
 
-//
-//tekes previously saved changes from DB
+//takes previously saved changes from DB
   export const fetchStyle = createAsyncThunk('interactions/fetchStyle', async (payload) => {
     const bookId = payload.bookId;
     const user_id = payload.user_id;
     try {
-        const res = await axios.get(`https://childrens-interactive-reader.onrender.com/books/style/${bookId}/${user_id}`);
+        const res = await axios.get(`${baseURL}/books/style/${bookId}/${user_id}`);
         if (!res.data[0].style) return res.data;
         // console.log('fetchStyle', res.data[0].style);
         return res.data[0].style;
@@ -19,7 +19,7 @@ import axios from "axios";
   export const postStyle = createAsyncThunk('interactions/postStyle', async (payload) => {
     const {user_id, book_id, style} = payload;
     try {
-        const res = await axios.post(`https://childrens-interactive-reader.onrender.com/books/style`, 
+        const res = await axios.post(`${baseURL}/books/style`, 
             { user_id, book_id, style },
             {
                 headers: {

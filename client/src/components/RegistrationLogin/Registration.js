@@ -1,8 +1,10 @@
 import {useState, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 import { AuthContext } from '../../App';
+
+const baseURL = process.env.REACT_APP_BASE_URL || '';
+axios.defaults.withCredentials = true; 
 
 const Registration = () => {
 
@@ -19,7 +21,7 @@ const Registration = () => {
     const registration = async() => {
         
         try{
-            const response = await axios.post( `/register`  ||  'http://localhost:3001/register', {
+            const response = await axios.post( `${baseURL}/register`, {
                 username, email, first_name, last_name, password
             });
             if (response.status === 200) {
