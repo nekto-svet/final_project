@@ -40,30 +40,30 @@ const Text = () => {
     },[bookId, page]);
 
 
-    // const splitedText = text.split('\\n');
+    const splitedText = text.split('\\n');
   
-    const targetWords = ['farmer', 'three little pigs', 'little pig', 'bad wolf'];
+    // const targetWords = ['farmer', 'three little pigs', 'little pig', 'bad wolf'];
 
-    const handleWordClick = (word) => {
-        console.log(`Clicked word: ${word}`);
-    };
+    // const handleWordClick = (word) => {
+    //     console.log(`Clicked word: ${word}`);
+    // };
 
-    const renderText = () => {
-        const regex = new RegExp(`(${targetWords.join('|')})`, 'gi');
-        const parts = text.split(regex);
+    // const renderText = () => {
+    //     const regex = new RegExp(`(${targetWords.join('|')})`, 'gi');
+    //     const parts = text.split(regex);
     
-        return parts.map((part, index) => {
-          if (targetWords.includes(part.toLowerCase())) {
-            return (
-              <span key={index} onClick={() => handleWordClick(part)} style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}>
-                {part}
-              </span>
-            );
-          } else {
-            return <span key={index}>{part}</span>;
-          }
-        });
-      };
+    //     return parts.map((part, index) => {
+    //       if (targetWords.includes(part.toLowerCase())) {
+    //         return (
+    //           <span key={index} onClick={() => handleWordClick(part)} style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}>
+    //             {part}
+    //           </span>
+    //         );
+    //       } else {
+    //         return <span key={index}>{part}</span>;
+    //       }
+    //     });
+    //   };
 
     const handleSaveSlyle = () => {
         let stringifiedStyle = JSON.stringify(interactionsState.style);
@@ -86,15 +86,15 @@ const Text = () => {
             textAlign:'left',
             }
             }>
-                {/* {splitedText.map((paragraph) => {
+                {splitedText.map((paragraph) => {
                 return (
                     <>
                     <div>{paragraph}</div>
                     <br/>
                     </>
                 )
-            })} */}
-            {renderText(text)}
+            })}
+            {/* {renderText(text)} */}
             </div>
         <br />
         <button onClick={() => dispatch(change_bg_color({page, color:'blue'}))}>Blue</button>
