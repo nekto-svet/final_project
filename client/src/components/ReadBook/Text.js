@@ -11,6 +11,7 @@ import {
     fetchText, 
 } from "./pagesSlise";
 import Canvas from "./Canvas/Canvas";
+import Illustration from "./Illustration";
 
 
 const Text = () => {
@@ -24,6 +25,9 @@ const Text = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
+    //pass here a name of a book?
+    const [character, setCharacter] = useState('');
 
     const interactionsState = useSelector(state => state.interactions);
 
@@ -42,11 +46,12 @@ const Text = () => {
 
     const splitedText = text.split('\\n');
   
-    // const targetWords = ['farmer', 'three little pigs', 'little pig', 'bad wolf'];
+    const targetWords = ['farmer', 'three little pigs', 'little pig', 'bad wolf'];
 
-    // const handleWordClick = (word) => {
-    //     console.log(`Clicked word: ${word}`);
-    // };
+    const handleWordClick = (word) => {
+        setCharacter(word);
+        console.log(`Clicked word: ${word}`);
+    };
 
     // const renderText = () => {
     //     const regex = new RegExp(`(${targetWords.join('|')})`, 'gi');
@@ -55,7 +60,7 @@ const Text = () => {
     //     return parts.map((part, index) => {
     //       if (targetWords.includes(part.toLowerCase())) {
     //         return (
-    //           <span key={index} onClick={() => handleWordClick(part)} style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}>
+    //           <span key={index} onClick={() => handleWordClick(part)} style={{ cursor: 'pointer', color: 'blue', textDecoration: 'none' }}>
     //             {part}
     //           </span>
     //         );
@@ -64,6 +69,31 @@ const Text = () => {
     //       }
     //     });
     //   };
+
+    const renderText = (text) => {
+        // First, split the text by newline characters to handle them separately
+        const lines = text.split('\\n');
+        console.log(lines);
+        const regex = new RegExp(`(${targetWords.join('|')})`, 'gi');
+      
+        // Process each line with the original functionality and then insert <br /> tags between lines
+        return lines.map((line, lineIndex) => (
+          <div key={lineIndex}>
+            {line.split(regex).map((part, index) => {
+              if (targetWords.includes(part.toLowerCase())) {
+                return (
+                  <span key={index} onClick={() => handleWordClick(part)} style={{ cursor: 'pointer', color: 'blue', textDecoration: 'none' }}>
+                    {part}
+                  </span>
+                );
+              } else {
+                return <span key={index}>{part}</span>;
+              }
+            })}
+            <br/>
+          </div>
+        ));
+      };
 
     const handleSaveSlyle = () => {
         let stringifiedStyle = JSON.stringify(interactionsState.style);
@@ -76,7 +106,7 @@ const Text = () => {
         <div style={{backgroundColor: bgColor}} position={'relative'}>
         <h1>Text</h1>
         <Canvas/>
-        <div style={
+        {/* <div style={
             { position: 'absolute',
             userSelect: 'none',
             zIndex: '1',
@@ -94,8 +124,18 @@ const Text = () => {
                     </>
                 )
             })}
-            {/* {renderText(text)} */}
-            </div>
+            </div> */}
+            
+            <div style={
+            { position: 'absolute',
+            userSelect: 'none',
+            zIndex: '1',
+            top: '200px', left: '50%',
+            transform: 'translateX(-50%)',
+            width: '400px',
+            textAlign:'left',
+            }}>{renderText(text)}</div>
+            
         <br />
         <button onClick={() => dispatch(change_bg_color({page, color:'blue'}))}>Blue</button>
         <button onClick={handleSaveSlyle}>Save Changes</button>
@@ -104,6 +144,7 @@ const Text = () => {
             <button onClick={() => navigate(`/book/${bookId}/${+page - 1}`)}>Previous Page</button>
             <button onClick={() => navigate(`/book/${bookId}/${+page + 1}`)}>Next Page</button>
         </div>
+        <Illustration text = {character}/>
         </div>
     );
 };
