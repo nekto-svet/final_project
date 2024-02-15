@@ -37,6 +37,16 @@ export  const fetchNumberOfPages = createAsyncThunk('pages/fetchNumberOfPages', 
     }
 });
 
+export const fetchTargetWords = createAsyncThunk('pages/fetchTargetWords', async(payload) => {
+  try {
+    const res = await axios.get(`${baseURL}/books/target_words/${payload}`);
+    console.log('from fetchTargetWords', res.data);
+    return res.data[0].words;
+} catch (err) {
+    console.log(err);
+}
+  
+})
 
 const pagesSlice = createSlice({
     name:'pages',
@@ -84,6 +94,18 @@ const pagesSlice = createSlice({
             state.numberOfPages = action.payload;
           })
           .addCase(fetchNumberOfPages.rejected, (state, action) => {
+            state.status = 'failed';
+          })
+
+
+          .addCase(fetchTargetWords.pending, (state) => {
+            state.status = 'loading';
+          })
+          .addCase(fetchTargetWords.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.targetWords = action.payload;
+          })
+          .addCase(fetchTargetWords.rejected, (state, action) => {
             state.status = 'failed';
           })
       },

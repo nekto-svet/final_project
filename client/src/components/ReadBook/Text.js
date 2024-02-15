@@ -46,7 +46,7 @@ const Text = () => {
 
     const splitedText = text.split('\\n');
   
-    const targetWords = ['farmer', 'three little pigs', 'little pig', 'bad wolf'];
+    const targetWords = pageState.targetWords.split(', ');
 
     const handleWordClick = (word) => {
         setCharacter(word);

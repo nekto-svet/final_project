@@ -57,6 +57,12 @@ export const __saveStyle = (user_id, book_id, style) => {
         .returning("*");
 };
 
+export const __getTargetWords = (book_id) => {
+    return db('target_words')
+    .select('words')
+    .where({ book_id })
+}
+
 // // import * as allBooks from './books.json' assert { type: 'json' };
 // import * as allState from './state.json' assert { type: 'json' };
 // // console.log(allState.default[0].state['0-1']);

@@ -8,8 +8,8 @@ import {
     __getPages,
     __getCountOfPages,
     __getStyle,
-    __saveStyle
-    // __getState,
+    __saveStyle,
+    __getTargetWords,
 }  from '../models/books_models.js'
 
 export const getAllBooks = (req, res) => {
@@ -39,6 +39,18 @@ export const getPages = async(req, res) => {
     try{
         const pages = await __getPages(bookId, page);
         res.json(pages);
+    }
+    catch (err){
+        console.log(err);
+        res.status(404).json({msg:'not found'})
+    }
+}
+
+export const getTargetWords = async(req, res) => {
+    const {bookId} = req.params;
+    try{
+        const targetWords = await __getTargetWords(bookId);
+        res.json(targetWords);
     }
     catch (err){
         console.log(err);

@@ -4,10 +4,13 @@ import { useSelector, useDispatch }  from 'react-redux';
 import { 
   fetchStyle,
   create_new_style,
-  postStyle,
 } from "./interactionsSlice";
 
-import { fetchNumberOfPages } from "./pagesSlise";
+import { 
+  fetchNumberOfPages,
+  fetchTargetWords,
+ } from "./pagesSlise";
+ 
 import TitlePage from "./TitlePage/TitlePage";
 import Text from "./Text";
 import PaletteBG from "./PaletteBackGround";
@@ -36,6 +39,7 @@ const Page = () => {
         if (style.payload == undefined) {
           dispatch(create_new_style({pages: number.payload}));
         }
+        dispatch(fetchTargetWords(bookId));
       });
       
     });
