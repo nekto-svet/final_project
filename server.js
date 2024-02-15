@@ -2,7 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv'
 import cors from 'cors';
 import books_router from'./router/books_router.js';
-import users_router from './router/users_router.js'
+import users_router from './router/users_router.js';
+import illustrations_router from './router/illustrations_router.js';
 import cookieParser from "cookie-parser";
 dotenv.config();
 import * as path from 'path';
@@ -37,6 +38,7 @@ app.listen(process.env.PORT || 3001, ()=> {
 
 app.use('/', users_router);
 app.use('/books', books_router);
+app.use('/illustrations', illustrations_router);
 app.use('/images', express.static('images'));
 
 app.use(express.static(join(__dirname, "client/build")));

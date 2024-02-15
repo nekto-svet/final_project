@@ -33,7 +33,28 @@ const baseURL = process.env.REACT_APP_BASE_URL || '';
     }
 });
  
-
+export const createIllustration = createAsyncThunk('interactions/createIllustration', async (payload) => {
+  console.log ('payload from createIllustration',payload);
+  const page = payload.page;
+  const text = payload.text;
+  console.log('createIllustration page', page, 'url', text);
+  const prompt = text + ' cute illustration for children book in pastel colors'
+  try {
+      const res = await axios.post(`${baseURL}/illustrations`, 
+          { prompt },
+          {
+              headers: {
+                  "Content-Type": "application/json",
+              },
+          }
+      );
+      // console.log (res.data);
+      return ({page, URL:res.data.URL});
+  } catch (error) {
+      console.error(error);
+      return error;
+  }
+});
 
 const interactionsSlice = createSlice({
     name:'interactions',
@@ -95,6 +116,7 @@ const interactionsSlice = createSlice({
             state.status = 'failed';
           })
 
+
           .addCase(postStyle.pending, (state) => {
             state.status = 'loading';
           })
@@ -104,6 +126,21 @@ const interactionsSlice = createSlice({
             return state;
           })
           .addCase(postStyle.rejected, (state, action) => {
+            state.status = 'failed';
+          })
+
+
+          .addCase(createIllustration.pending, (state) => {
+            state.status = 'loading';
+          })
+          .addCase(createIllustration.fulfilled, (state, action) => {
+            const index = action.payload.page;
+            const URL = action.payload.URL;
+            state.status = 'succeeded';
+            console.log('createIllustration ended, URL ', URL);
+            state.style[index].illustration = URL;
+          })
+          .addCase(createIllustration.rejected, (state, action) => {
             state.status = 'failed';
           })
       },

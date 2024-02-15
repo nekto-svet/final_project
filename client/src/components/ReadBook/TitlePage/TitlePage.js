@@ -4,6 +4,7 @@ import { fetchBookData } from '../pagesSlise';
 import { postStyle, delete_drawing_history } from "../interactionsSlice";
 import { useEffect } from "react";
 import Canvas from "../Canvas/Canvas";
+import Illustration from "../Illustration";
 
 const TitlePage = () => {
     const navigate = useNavigate();
@@ -41,6 +42,7 @@ const TitlePage = () => {
             <div><button onClick={() => navigate(`/book/${book_id}/1`)}>Read from the beginning!</button></div>
             <Canvas/>
             <button onClick={() => dispatch(delete_drawing_history(page))}>Remove Drawing</button>
+            <Illustration text = {currBookInfo.title}/>
         </div>
     )
 }
