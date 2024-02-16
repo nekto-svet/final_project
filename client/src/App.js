@@ -9,7 +9,9 @@ import Registration from './components/RegistrationLogin/Registration';
 import Page from './components/ReadBook/Page'
 import BookSelection from './components/book_selection/BookSelection';
 import Authorization from './components/authorization/Authorization';
+import Redirect from './components/authorization/Redirect';
 import Nav from './components/navigation/Nav';
+import ErrorBoundary from './components/errorBoundary/ErrorBoundary';
 
 export const AuthContext = createContext();
 
@@ -22,11 +24,11 @@ function App() {
     <div className="App">
       <Nav/>
       <Routes>
-        <Route path="/" element={<First/>}/>
-        <Route path="/select" element={<Authorization><BookSelection/></Authorization>}/>
+        <Route path="/" element={<Redirect><First/></Redirect>}/>
+        <Route path="/select" element={<Authorization><ErrorBoundary><BookSelection/></ErrorBoundary></Authorization>}/>
         <Route path="/book/:bookId/:page" element={<Authorization><Page/></Authorization>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Registration/>}/>
+        <Route path='/login' element={<Redirect><Login/></Redirect>}/>
+        <Route path='/register' element={<Redirect><Registration/></Redirect>}/>
       </Routes>
 
     </div>

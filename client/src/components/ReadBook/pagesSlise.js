@@ -102,6 +102,7 @@ const pagesSlice = createSlice({
             state.status = 'loading';
           })
           .addCase(fetchTargetWords.fulfilled, (state, action) => {
+            console.log('target words fetched', action.payload);
             state.status = 'succeeded';
             state.targetWords = action.payload;
           })

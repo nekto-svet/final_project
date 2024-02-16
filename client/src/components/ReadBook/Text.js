@@ -12,6 +12,7 @@ import {
 } from "./pagesSlise";
 import Canvas from "./Canvas/Canvas";
 import Illustration from "./Illustration";
+import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
 
 const Text = () => {
@@ -46,7 +47,7 @@ const Text = () => {
 
     const splitedText = text.split('\\n');
   
-    const targetWords = pageState.targetWords.split(', ');
+    const targetWords = pageState.targetWords?pageState.targetWords.split(', '):'';
 
     const handleWordClick = (word) => {
         setCharacter(word);
@@ -73,8 +74,8 @@ const Text = () => {
     const renderText = (text) => {
         // First, split the text by newline characters to handle them separately
         const lines = text.split('\\n');
-        console.log(lines);
-        const regex = new RegExp(`(${targetWords.join('|')})`, 'gi');
+        console.log('targetWords from renderText',targetWords=='');
+        const regex =targetWords==''? '' : new RegExp(`(${targetWords.join('|')})`, 'gi');
       
         // Process each line with the original functionality and then insert <br /> tags between lines
         return lines.map((line, lineIndex) => (
@@ -100,32 +101,42 @@ const Text = () => {
         dispatch(postStyle({user_id, book_id:bookId, style:stringifiedStyle}));
     }
     
+    const PageNavigate = () => {
+      if (page == 1 ) {
+        return(
+          <div>
+            <button onClick={() => navigate(`/book/${bookId}/${+page - 1}`)}>Back to the Title Page</button>
+            <button onClick={() => navigate(`/book/${bookId}/${+page + 1}`)}>Next Page</button>
+        </div>
+        )
+      }
+      else if (page == pageState.numberOfPages) {
+        return(
+          <div>
+            <div>You ended this book!</div>
+            <button onClick={() => navigate(`/book/${bookId}/${+page - 1}`)}>Previous Page</button>
+            <button onClick={() => navigate(`/select`)}>Select another book</button>
+        </div>
+        )
+      }
+      else if (page<0 || page>pageState.numberOfPages){
+        navigate(`/book/${bookId}/0`)
+      }
+      else {
+        return (
+          <div>
+            <button onClick={() => navigate(`/book/${bookId}/${+page - 1}`)}>Previous Page</button>
+            <button onClick={() => navigate(`/book/${bookId}/${+page + 1}`)}>Next Page</button>
+          </div>
+        )
+      }
+    }
 
     let bgColor = currStyle ? currStyle.bgColor : 'pink'
     return (
         <div style={{backgroundColor: bgColor}} position={'relative'}>
         <h1>Text</h1>
-        <Canvas/>
-        {/* <div style={
-            { position: 'absolute',
-            userSelect: 'none',
-            zIndex: '1',
-            top: '200px', left: '50%',
-            transform: 'translateX(-50%)',
-            width: '400px',
-            textAlign:'left',
-            }
-            }>
-                {splitedText.map((paragraph) => {
-                return (
-                    <>
-                    <div>{paragraph}</div>
-                    <br/>
-                    </>
-                )
-            })}
-            </div> */}
-            
+        <ErrorBoundary><Canvas/></ErrorBoundary>            
             <div style={
             { position: 'absolute',
             userSelect: 'none',
@@ -140,11 +151,8 @@ const Text = () => {
         <button onClick={() => dispatch(change_bg_color({page, color:'blue'}))}>Blue</button>
         <button onClick={handleSaveSlyle}>Save Changes</button>
         <button onClick={() => dispatch(delete_drawing_history(page))}>Remove Drawing</button>
-        <div>
-            <button onClick={() => navigate(`/book/${bookId}/${+page - 1}`)}>Previous Page</button>
-            <button onClick={() => navigate(`/book/${bookId}/${+page + 1}`)}>Next Page</button>
-        </div>
-        <Illustration text = {character}/>
+        <PageNavigate/>
+        <ErrorBoundary><Illustration text = {character}/></ErrorBoundary>
         </div>
     );
 };

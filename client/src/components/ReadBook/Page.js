@@ -14,6 +14,7 @@ import {
 import TitlePage from "./TitlePage/TitlePage";
 import Text from "./Text";
 import PaletteBG from "./PaletteBackGround";
+import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 // import Canvas from "./Canvas/Canvas";
 
 const Page = () => {
@@ -56,7 +57,7 @@ const Page = () => {
     return (
       <div>
         <PaletteBG />
-        <TitlePage/>
+        <ErrorBoundary><TitlePage/></ErrorBoundary>
         {/* <Canvas/> */}
       </div>
     );
@@ -64,7 +65,7 @@ const Page = () => {
     return (
       <div>
         <PaletteBG />
-        <Text />
+        <ErrorBoundary><Text /></ErrorBoundary>
         {/* <Canvas/> */}
       </div>
     );
