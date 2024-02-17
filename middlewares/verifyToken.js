@@ -4,7 +4,7 @@ dotenv.config();
 
 export const verifytoken = (req, res, next) => {
     console.log ('from verifytoken all cookies', req.cookies)
-    const acsesstoken = req.cookies.token || req.headers['x-access-token'];
+    const acsesstoken =  req.headers['x-access-token']; //req.cookies.token ||
     console.log ('from verifytoken', req.cookies.token, req.headers['x-access-token'] );
 
     if(!acsesstoken) return res.status(401).json({msg:"unauthorized"});

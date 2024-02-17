@@ -33,8 +33,7 @@ const Illustrationtext = ({text, loading}) => {
 //    }
 
     return (
-        <div id='illustration_parent'>
-            <div className='TP_navigate_text' id='illustration_button'>CREATE AN ILLUSTRATION</div>
+        <div id='T_illustration_parent'>
             <br/>
             <div style={{margin:'0 auto', position:'relative'}}>
                 {loading?

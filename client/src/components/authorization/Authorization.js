@@ -69,10 +69,10 @@ const Authorization = (props) => {
             if (res.status === 200) {
                 setRedirect(true);
             } else {
-                navigate('/login');
+                navigate('/');
             }
         } catch (error) {
-            navigate('/login');
+            navigate('/');
         }
     }
     return redirect ? props.children : <>Not authorized</>;

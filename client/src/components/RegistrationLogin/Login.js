@@ -1,3 +1,4 @@
+'./RegistrLogin.css'
 import {useState, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -36,9 +37,9 @@ const Login = ({action}) => {
 
 
     return(
-        <>
-         <h1>{action}</h1>
-        <div>
+        <div id='RL_body'>
+         <div id='RL_title'>Login</div>
+        <div id ='RL_input'>
             <input
             id='email'
             type='email'
@@ -54,9 +55,12 @@ const Login = ({action}) => {
             onChange={(e)=> setPassword(e.target.value)}
             />
         </div>
-        <button onClick={login}>Login</button>
-        <div>{message}</div>
-        </>
+        <div id ='RL_buttons'>
+            <div style={{fontSize:'20px'}}>{message}</div>
+            <button onClick={login}>Login</button>
+            <button  onClick={() => navigate('/register')}>Go to Sign Up page</button>
+        </div>
+        </div>
     )
 }
 

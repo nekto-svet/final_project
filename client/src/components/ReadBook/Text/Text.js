@@ -78,7 +78,8 @@ const Text = () => {
             <ErrorBoundary><Illustrationtext
             loading={loading}
             text = {character}/></ErrorBoundary>
-            <button id='T_button_save' onClick={handleSaveSlyle}>Save Changes</button>
+            <br/>
+            <br/>
             <PageNavigate/>
           </div>
           

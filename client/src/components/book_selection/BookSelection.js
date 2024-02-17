@@ -58,7 +58,7 @@ const BookSelection = () => {
                 setLoading((currentLoading) => {
                     return currentLoading.filter(item => item !== id);
                 });
-            }, 10000)
+            }, 7000)
         } catch (error) {
             console.error(error);
         }

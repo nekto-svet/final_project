@@ -20,20 +20,15 @@ const RenderText = ({setCharacter,setLoading, text}) => {
        })
       }
 
-    // const handleWordClick = (word) => {
-    //     setCharacter(word);
-    //     console.log(`Clicked word: ${word}`);
-    // };
-
     const targetWords = pageState.targetWords?pageState.targetWords.split(', '):'';
-     // First, split the text by newline characters to handle them separately
-     const lines = text.split('\\n');
+     // split the text by \n
+     const lines = text? text.split('\\n'): ['loading'];
      console.log('targetWords from renderText',targetWords=='');
      const regex =targetWords==''? '' : new RegExp(`(${targetWords.join('|')})`, 'gi');
          // Process each line with the original functionality and then insert <br /> tags between lines
      return lines.map((line, lineIndex) => (
        <div style={{
-            fontSize:'calc(10px + 0.4vw)',
+            fontSize:'calc(13px + 0.4vw)',
             // position: 'absolute',
             // userSelect: 'none',
             // zIndex: '1',

@@ -1,0 +1,34 @@
+#RL_body{
+    height: 100vh;
+    background-image: url('../../../images/DALL·E\ 2024-02-17\ 21.08.56\ -\ A\ whimsical\ and\ minimalist\ pattern\ for\ a\ children\'s\ book\ website\ background\,\ featuring\ generic\ little\ characters\ such\ as\ a\ little\ girl\,\ a\ wolf\,\ woods\,.webp');
+}
+
+#RL_title{
+    font-size: 50px;
+    font-weight: 800;
+    text-shadow: 0 0 8px #fff, 0 0 10px #fff, 0 0 12px #fff;
+    background: #ffffff93;
+    box-shadow: 0 0 15px 5px #ffffff; 
+    color: #6e2f34;
+}
+
+#RL_buttons button{
+    width: 200px;
+    height: 50px;
+    margin: 20px;
+    background: #a5d1a3;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
+
+#RL_input input{
+    width: 200px;
+    height: 50px;
+    margin: 20px;
+    background: #a5d1a3;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 5px;
+}

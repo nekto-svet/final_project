@@ -1,3 +1,4 @@
+import './RegistrLogin.css'
 import {useState, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -36,9 +37,9 @@ const Registration = () => {
     }
 
     return(
-        <>
-         <h1>Registration</h1>
-        <div>
+        <div id='RL_body'>
+         <div id='RL_title'>Registration</div>
+        <div id ='RL_input'>
             <input
             id='email'
             type='email'
@@ -74,11 +75,14 @@ const Registration = () => {
             placeholder='Enter your last_name'
             onChange={(e)=> setLast_name(e.target.value)}
             />
+        </div >
+        <div id ='RL_buttons'>
+            <div style={{fontSize:'20px'}}>{message}</div>
+            <button  onClick={registration}>Register</button>
+            <button  onClick={() => navigate('/login')}>Go to Login page</button>
         </div>
-        {/* </Box> */}
-        <button variant='contained' onClick={registration}>Register</button>
-        <div>{message}</div>
-        </>
+        
+        </div>
     )
 }
 

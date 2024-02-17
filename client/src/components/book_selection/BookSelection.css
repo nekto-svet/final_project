@@ -3,6 +3,7 @@
     min-height: 100vh;
     padding: 20px;
     background-color: #ba6239;
+    background-image: url('../../../images/bg_wood.png');
 }
 
 #BS_header{

@@ -33,11 +33,11 @@ export const login = async(req, res) => {
         const row = await _login(email.toLowerCase());
 
         if (row.length === 0){
-            return res.status(404).json({msg:'email not found'})
+            return res.status(404).json({msg:'There is no user with this email'})
         }
 
         const match = bcrypt.compareSync(password, row[0].hashed_pass);
-        if (!match) return res.status(404).json({msg:'wrong password'});
+        if (!match) return res.status(404).json({msg:'Wrong password'});
 
         const user_id = row[0].user_id;
         const user_email = row[0].email;
@@ -51,12 +51,12 @@ export const login = async(req, res) => {
         //     // sameSite: 'None',
         //     // secure: true,
         // })
-        res.cookie('token', acsesstoken, {
-            maxAge: 5 * 24 * 60 * 60 * 1000, 
-            httpOnly: true,
-            sameSite: 'None',
-            secure: true,
-        });
+        // res.cookie('token', acsesstoken, {
+        //     maxAge: 5 * 24 * 60 * 60 * 1000, 
+        //     httpOnly: true,
+        //     sameSite: 'None',
+        //     secure: true,
+        // });
 
         // console.log('from users_controller req.cookies', req.cookies.token);
         res.json({token:acsesstoken, user_id});
