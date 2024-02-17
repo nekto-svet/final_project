@@ -1,3 +1,4 @@
+import './Page.css'
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
@@ -13,6 +14,7 @@ import {
 import Canvas from "./Canvas/Canvas";
 import Illustration from "./Illustration";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
+import Nav from '../navigation/Nav';
 
 
 const Text = () => {
@@ -53,23 +55,6 @@ const Text = () => {
         setCharacter(word);
         console.log(`Clicked word: ${word}`);
     };
-
-    // const renderText = () => {
-    //     const regex = new RegExp(`(${targetWords.join('|')})`, 'gi');
-    //     const parts = text.split(regex);
-    
-    //     return parts.map((part, index) => {
-    //       if (targetWords.includes(part.toLowerCase())) {
-    //         return (
-    //           <span key={index} onClick={() => handleWordClick(part)} style={{ cursor: 'pointer', color: 'blue', textDecoration: 'none' }}>
-    //             {part}
-    //           </span>
-    //         );
-    //       } else {
-    //         return <span key={index}>{part}</span>;
-    //       }
-    //     });
-    //   };
 
     const renderText = (text) => {
         // First, split the text by newline characters to handle them separately
@@ -135,6 +120,7 @@ const Text = () => {
     let bgColor = currStyle ? currStyle.bgColor : 'pink'
     return (
         <div style={{backgroundColor: bgColor}} position={'relative'}>
+        <Nav/>
         <h1>Text</h1>
         <ErrorBoundary><Canvas/></ErrorBoundary>            
             <div style={

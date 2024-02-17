@@ -10,7 +10,6 @@ import Page from './components/ReadBook/Page'
 import BookSelection from './components/book_selection/BookSelection';
 import Authorization from './components/authorization/Authorization';
 import Redirect from './components/authorization/Redirect';
-import Nav from './components/navigation/Nav';
 import ErrorBoundary from './components/errorBoundary/ErrorBoundary';
 
 export const AuthContext = createContext();
@@ -22,7 +21,6 @@ function App() {
   return (
     <AuthContext.Provider value={{token, setToken, user_id, setUser_id}}>
     <div className="App">
-      <Nav/>
       <Routes>
         <Route path="/" element={<Redirect><First/></Redirect>}/>
         <Route path="/select" element={<Authorization><ErrorBoundary><BookSelection/></ErrorBoundary></Authorization>}/>

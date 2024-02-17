@@ -1,0 +1,29 @@
+#N_nav{
+    height: 100px;
+    background: #49983fca;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px 0 30px;
+    align-items: center;
+    border-radius: 5px;
+    margin: 15px;
+    box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.532);
+}
+
+#N_header{
+    font-size: 30px;
+    font-weight: 800;
+    color: #653622;
+}
+
+#N_nav button {
+    margin: 10px;
+    height: 30px;
+    width: 120px;
+    border: 2px solid #3a1f83;
+    border-radius: 5px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #653622;
+    background-color: #80d6fbc5;
+}

@@ -1,3 +1,4 @@
+import './Page.css'
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch }  from 'react-redux';
@@ -15,6 +16,7 @@ import TitlePage from "./TitlePage/TitlePage";
 import Text from "./Text";
 import PaletteBG from "./PaletteBackGround";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
+// import Nav from '../navigation/Nav';
 // import Canvas from "./Canvas/Canvas";
 
 const Page = () => {
@@ -55,19 +57,21 @@ const Page = () => {
 
   if (page == 0) {
     return (
-      <div>
+      <>
+        {/* <Nav/> */}
         <PaletteBG />
         <ErrorBoundary><TitlePage/></ErrorBoundary>
         {/* <Canvas/> */}
-      </div>
+      </>
     );
   } else {
     return (
-      <div>
+      <>
+        {/* <Nav/> */}
         <PaletteBG />
         <ErrorBoundary><Text /></ErrorBoundary>
         {/* <Canvas/> */}
-      </div>
+      </>
     );
   }
 

@@ -1,0 +1,100 @@
+#TP_canvas_ill_parent{
+    display: flex;
+    justify-content: space-around;
+    margin: 0 0 0 80px;
+}
+
+#canvas_parent{
+    display: inline-block;
+}
+
+canvas{
+    border: solid 4px #867ad7aa;
+    border-radius: 5px;
+
+}
+
+#P_palette_parent{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    position:absolute;
+    width:50px;
+    left: 20px;
+    top: 150px;
+}
+
+#PM_palette_marker_parent{
+    display: inline-block;
+    position: relative;
+    right: 20px;
+}
+
+.palette{
+    border: solid 4px #867ad7aa;
+    border-radius: 5px;
+}
+
+#C_color_size_stroke{
+    display: flex;
+}
+
+#TP_header{
+    position: absolute;
+    top: 50px;
+    left: 40vw;
+    display: inline-block;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0 20px 0 20px;
+    color:#5d2e1d;
+}
+
+#TP_navigate{
+    /* display: flex;
+    justify-content: center; */
+    margin: 10px 0 20px 0;
+    /* position: relative;
+    right: 110px; */
+}
+
+#TP_navigate button {
+    margin: 5px;
+    background: #53a548ca;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    /* padding: 10px; */
+    font-size: 18px;
+}
+
+#TP_navigate select{
+    margin: 5px;
+    background: #53a548ca;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    /* padding: 10px; */
+    font-size: 18px;
+}
+
+.TP_navigate_text{
+    margin: 5px;
+    padding-top: 5px;
+    font-size: 20px;
+    font-weight: 700;
+    color:#250daa;
+}
+
+/* #TP_navigate_text_read{
+    font-size: 20px;
+} */
+#illustration_parent{
+    margin-top: 50px;
+}
+
+#illustration_img{
+    width: 25vw;
+    border: solid 4px #867ad7aa;
+    border-radius: 5px;
+}

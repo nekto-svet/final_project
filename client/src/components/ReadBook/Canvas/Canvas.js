@@ -1,3 +1,4 @@
+import '../Page.css'
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -5,8 +6,10 @@ import {
     change_stroke_color,
     change_stroke_width,
     save_drawing_history, 
+    delete_drawing_history,
 } from "../interactionsSlice";
 import { CirclePicker } from 'react-color';
+import PaletteMarker from '../PaletteMarker';
 
 
 const Canvas = () => {
@@ -29,40 +32,18 @@ const Canvas = () => {
     const currStrokeColor = state.style.length == 0? 'black' : state.style[page].strokeColor;
     const currStrokeWidth = state.style.length == 0? 1 : state.style[page].strokeWidth;
 
-    const updateCanvasSize = () => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const context = canvas.getContext('2d');
+    const canvas_width = Math.max(window.innerWidth * 0.5, 600); 
+    const canvas_height = (canvas_width * 3) / 4; 
 
-        const savedContent = canvas.toDataURL();
-
-        const width = Math.max(window.innerWidth * 0.7, 600); 
-        const height = (width * 3) / 4; 
-        canvas.width = width;
-        canvas.height = height;
-
-        base64ToCanvas(canvas, savedContent);
-    };
-
-    //  resize and setup event listener for future resizes
-    // useEffect(() => {
-    //     updateCanvasSize();
-    //     window.addEventListener("resize", updateCanvasSize);
-
-    //     return () => window.removeEventListener("resize", updateCanvasSize);
-    // }, []);
-
-        
      // restore previous drowing on a canvas
     useEffect(() => {
-        // console.log('restore prev drawing from canvas');
+        // updateCanvasSize();
         const canvas = canvasRef.current;
         if (!canvas) return; 
         const context = canvas.getContext("2d");
+
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        // const savedDrawing = currStyle?currStyle.drawingHistory:null;
-        // console.log('savedDrawing from canvas', savedDrawing);
         if (savedDrawing) {
         base64ToCanvas(canvas, savedDrawing);
         }
@@ -72,21 +53,22 @@ const Canvas = () => {
 
      //  DRAW
     useEffect(() => {
+
         const canvas = canvasRef.current;
         if (!canvas) return; 
         const context = canvas.getContext("2d");
         
-        const strokeColor = state.style.length == 0? 'black' : state.style[page].strokeColor; 
-        const strokeWidth = state.style.length == 0? 1 : state.style[page].strokeWidth;
-        // console.log ('strokeColor', strokeColor);
-        // console.log ('strokeColor',state.style[page].strokeColor);
+        const strokeColor = state.style[page]? state.style[page].strokeColor : 'black'; 
+        const strokeWidth = state.style[page]? state.style[page].strokeWidth : 1;
 
         const startDrawing = (e) => {
         setIsDrawing(true);
         context.beginPath();
         context.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+        console.log('strokeWidth', strokeWidth)
         context.strokeStyle = strokeColor;
         context.lineWidth = strokeWidth;
+        console.log ('context.lineWidth', context.lineWidth)
         };
     
         const draw = (e) => {
@@ -104,7 +86,6 @@ const Canvas = () => {
             if (currStyle) {
                 dispatch(save_drawing_history({page, currId: curr_id, imageData: base64Image }));
             }
-            // console.log('Base64 image data', base64Image);
         });
         };
     
@@ -141,22 +122,25 @@ const Canvas = () => {
         image.src = base64Image;
     }
 
- 
+ //width={800} height={600}
     return (
         <>
-        <canvas ref={canvasRef} width={800} height={600} style={{ border: "1px solid #000",}} />
-        <div>
-        <CirclePicker color={currStrokeColor} onChangeComplete={(color) => dispatch(change_stroke_color({page, color: color.hex}))} />
-        {/* <p>Selected Color: {currStrokeColor}</p> */}
-        <input
-            type="range"
-            value={currStrokeWidth}
-            onChange={(e) => dispatch(change_stroke_width({page, width: parseFloat(e.target.value)}))}
-            min="0.5"
-            max="10"
-            step="0.1"
-        />
-        </div>
+            <div style={{display:'flex'}}>
+                <canvas ref={canvasRef} width={canvas_width} height={canvas_height}  />
+                <div style={{display:'flex', flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
+                    <input
+                        type="range"
+                        value={currStrokeWidth}
+                        onChange={(e) => dispatch(change_stroke_width({page, width: parseFloat(e.target.value)}))}
+                        min="0.5"
+                        max="10"
+                        step="0.1"
+                        style={{transform: 'rotate(-90deg)'}}
+                    />
+                    <PaletteMarker/>
+                </div>
+            </div>
+        <button onClick={() => dispatch(delete_drawing_history(page))}>Remove Drawing</button>
 
         </>
     )

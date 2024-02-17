@@ -1,3 +1,4 @@
+import '../Page.css';
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams} from "react-router-dom";
 import { fetchBookData } from '../pagesSlise';
@@ -6,6 +7,7 @@ import { useEffect, useRef } from "react";
 import Canvas from "../Canvas/Canvas";
 import Illustration from "../Illustration";
 import ErrorBoundary from "../../errorBoundary/ErrorBoundary";
+import Nav from '../../navigation/Nav';
 
 const TitlePage = () => {
     const navigate = useNavigate();
@@ -53,23 +55,39 @@ const TitlePage = () => {
     
     const bgColor = currStyle ? currStyle.bgColor : 'pink'
     return (
-        <div style={{backgroundColor: bgColor, height:'100vh'}} >
-            <div>Welcome to the book "{currBookInfo.title}"!</div>
+        <div id='TP_parent' style={{backgroundColor: bgColor, minHeight:'100vh', paddingTop:'10px'}} >
+            <Nav/>
+            <div id='TP_header'>{currBookInfo.title}</div>
             
-            <div>
-                <button onClick={() => navigate(`/book/${book_id}/1`)}>Read from the beginning!</button>
-                <div>
-                    <select>
-                        <option>Read from page</option>
-                        {pagesState.numberOfPages && pageOptions()}
-                    </select>
-                    <button onClick={handleNavigate}>Go to the selected page</button>
+            
+            <div id='TP_canvas_ill_parent'> 
+                <div id='canvas_parent'>
+                    
+                    <div className='TP_navigate_text'>DRAW!</div>
+                    <Canvas/>
                 </div>
-            </div>
 
-            <Canvas/>
-            <button onClick={() => dispatch(delete_drawing_history(page))}>Remove Drawing</button>
-            <ErrorBoundary><Illustration text = {currBookInfo.title}/></ErrorBoundary>
+                <div>
+                    <div id='TP_navigate'>
+                        <div>
+                            <div className='TP_navigate_text' id='TP_navigate_text_read'>READ</div>
+                            <button onClick={() => navigate(`/book/${book_id}/1`)}>from the beginning</button>
+                        </div>
+                        
+                        <div style={{display:'flex'}}>
+                            <div className='TP_navigate_text'>or</div>  
+                            <select ref={pageToNavigate}>
+                                <option>from page.</option>
+                                {pagesState.numberOfPages && pageOptions()}
+                            </select>
+                            <button onClick={handleNavigate}> Go to the selected page!</button>
+                        </div>
+                    </div>
+                    <ErrorBoundary><Illustration text = {currBookInfo.title}/></ErrorBoundary>
+                </div>
+                
+            </div>
+            
         </div>
     )
 }

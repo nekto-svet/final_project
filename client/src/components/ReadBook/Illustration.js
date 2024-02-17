@@ -21,11 +21,10 @@ const Illustration = (props) => {
    
 
     return (
-        <div>
-            <button onClick={() => dispatch(createIllustration({text, page}))}>Create an illustration!</button>
-            <div>
-                {currStyle ? currStyle.illustration? <img width={500} src={currStyle.illustration} alt='cute illustration'/> : null :null}
-            </div>
+        <div id='illustration_parent'>
+            <button className='TP_navigate_text' id='illustration_button' onClick={() => dispatch(createIllustration({text, page}))}>Create an illustration!</button>
+            <br/>
+            {currStyle ? currStyle.illustration? <img id='illustration_img' width={500} src={currStyle.illustration} alt='cute illustration'/> : null :null}
         </div>
     )
 }
