@@ -1,6 +1,7 @@
 #RL_body{
     height: 100vh;
     background-image: url('../../../images/DALL·E\ 2024-02-17\ 21.08.56\ -\ A\ whimsical\ and\ minimalist\ pattern\ for\ a\ children\'s\ book\ website\ background\,\ featuring\ generic\ little\ characters\ such\ as\ a\ little\ girl\,\ a\ wolf\,\ woods\,.webp');
+    /* background-repeat: repeat; */
 }
 
 #RL_title{

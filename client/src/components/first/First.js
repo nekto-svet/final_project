@@ -70,6 +70,7 @@ const First = () => {
     return (
         <div id='F_parent'>
             <div id='F_title'>WELCOME TO THE MAGIC PAGES</div>
+            <br/>
             <div id='F_buttons'>
                 <button onClick={() => navigate('/register')}>Sign Up</button>
                 <button onClick={() => navigate('/login')}>Log In</button>
