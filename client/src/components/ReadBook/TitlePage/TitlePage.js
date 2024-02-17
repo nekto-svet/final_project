@@ -8,6 +8,7 @@ import Canvas from "../Canvas/Canvas";
 import Illustration from "../Illustration";
 import ErrorBoundary from "../../errorBoundary/ErrorBoundary";
 import Nav from '../../navigation/Nav';
+import PaletteBG from '../Palettes/PaletteBackGround';
 
 const TitlePage = () => {
     const navigate = useNavigate();
@@ -53,21 +54,24 @@ const TitlePage = () => {
         }
     };
     
-    const bgColor = currStyle ? currStyle.bgColor : 'pink'
+    const bgColor = currStyle ? currStyle.bgColor : 'lightyellow'
     return (
-        <div id='TP_parent' style={{backgroundColor: bgColor, minHeight:'100vh', paddingTop:'10px'}} >
+        <div id='TP_parent' style={{backgroundColor: bgColor, minHeight:'100vh', paddingTop:'5px'}} >
             <Nav/>
             <div id='TP_header'>{currBookInfo.title}</div>
             
             
             <div id='TP_canvas_ill_parent'> 
+
+                <PaletteBG/>
+
                 <div id='canvas_parent'>
                     
-                    <div className='TP_navigate_text'>DRAW!</div>
+                    <div className='TP_navigate_text' id='TP_text_draw'>DRAW!</div>
                     <Canvas/>
                 </div>
 
-                <div>
+                <div style={{marginLeft:'1vw'}}>
                     <div id='TP_navigate'>
                         <div>
                             <div className='TP_navigate_text' id='TP_navigate_text_read'>READ</div>
@@ -82,6 +86,9 @@ const TitlePage = () => {
                             </select>
                             <button onClick={handleNavigate}> Go to the selected page!</button>
                         </div>
+                    </div>
+                    <div>
+
                     </div>
                     <ErrorBoundary><Illustration text = {currBookInfo.title}/></ErrorBoundary>
                 </div>

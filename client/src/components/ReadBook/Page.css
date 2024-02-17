@@ -1,7 +1,7 @@
 #TP_canvas_ill_parent{
     display: flex;
     justify-content: space-around;
-    margin: 0 0 0 80px;
+    margin: 5px;
 }
 
 #canvas_parent{
@@ -9,39 +9,68 @@
 }
 
 canvas{
+    /* color:#797a7a */
     border: solid 4px #867ad7aa;
     border-radius: 5px;
 
+}
+
+#C_buttom_remove{
+    margin: 5px;
+    background: #53a548ca;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    /* padding: 10px; */
+    font-size: calc(10px + 0.5vw);
+}
+
+/* #C_color_size_stroke{
+    display: flex;
+} */
+
+#C_palette_size_marker{
+    display:flex;
+    flex-direction: column;
+    justify-content:space-between; 
+    align-items:center;
+    padding-bottom: 40px;
+}
+
+#C_size_marker{
+    /* transform: rotate(-90deg); */
+    /* margin: 40px 50px 2px 20px; */
+    margin-top: 20px;
+    width: 10vw;
+}
+
+#PM_palette_marker_parent{
+    display: inline-block;
+    /* position: relative;
+    right: 40px; */
 }
 
 #P_palette_parent{
     display:flex;
     flex-direction:column;
     align-items:center;
-    position:absolute;
+    /* position:absolute;
     width:50px;
     left: 20px;
-    top: 150px;
+    top: 170px; */
 }
 
-#PM_palette_marker_parent{
-    display: inline-block;
-    position: relative;
-    right: 20px;
-}
 
 .palette{
     border: solid 4px #867ad7aa;
     border-radius: 5px;
 }
 
-#C_color_size_stroke{
-    display: flex;
-}
+
 
 #TP_header{
     position: absolute;
-    top: 50px;
+    top: 60px;
     left: 40vw;
     display: inline-block;
     font-size: 25px;
@@ -65,7 +94,7 @@ canvas{
     border-radius: 5px;
     height: 40px;
     /* padding: 10px; */
-    font-size: 18px;
+    font-size: calc(10px + 0.5vw);
 }
 
 #TP_navigate select{
@@ -75,7 +104,7 @@ canvas{
     border-radius: 5px;
     height: 40px;
     /* padding: 10px; */
-    font-size: 18px;
+    font-size: calc(10px + 0.5vw);
 }
 
 .TP_navigate_text{
@@ -86,15 +115,74 @@ canvas{
     color:#250daa;
 }
 
+#TP_text_draw{
+    padding-right:  10vw;
+}
+
 /* #TP_navigate_text_read{
     font-size: 20px;
 } */
 #illustration_parent{
-    margin-top: 50px;
+    margin-top: 2vw;
+    position: relative;
+    cursor: url('/images/icons8-mouse-cursor-100.png'), pointer;
+    /* text-align: center; */
 }
 
-#illustration_img{
-    width: 25vw;
+.illustration_img{
+    width: calc(200px + 6vw);
+    height: calc(200px + 6vw);
     border: solid 4px #867ad7aa;
     border-radius: 5px;
+    margin: 0 auto;
+}
+
+
+#P_loading_illustr{
+    margin: 0 auto;
+    width: calc(200px + 6vw);
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    height: 150px;
+    background-color:#4cc971d2;
+    border-radius: 5px;
+}
+
+#P_loading_illustr div{
+    color: #541e16;
+    font-weight: 700;
+    padding: 20px;
+}
+
+#P_loading_img {
+    position: absolute;
+    left: 70px;
+    top: 100px
+}
+
+#T_navigate button{
+    margin: 5px;
+    background: #53a548ca;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    /* padding: 10px; */
+    font-size: calc(10px + 0.5vw);
+}
+
+#T_button_save{
+    margin: 2vw 5px 2vw 5px;
+    background: #53a548ca;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    /* padding: 10px; */
+    font-size: calc(10px + 0.5vw);
 }

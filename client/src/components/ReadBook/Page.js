@@ -13,11 +13,9 @@ import {
  } from "./pagesSlise";
  
 import TitlePage from "./TitlePage/TitlePage";
-import Text from "./Text";
-import PaletteBG from "./PaletteBackGround";
+import Text from "./Text/Text";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
-// import Nav from '../navigation/Nav';
-// import Canvas from "./Canvas/Canvas";
+
 
 const Page = () => {
 
@@ -58,19 +56,13 @@ const Page = () => {
   if (page == 0) {
     return (
       <>
-        {/* <Nav/> */}
-        <PaletteBG />
         <ErrorBoundary><TitlePage/></ErrorBoundary>
-        {/* <Canvas/> */}
       </>
     );
   } else {
     return (
       <>
-        {/* <Nav/> */}
-        <PaletteBG />
         <ErrorBoundary><Text /></ErrorBoundary>
-        {/* <Canvas/> */}
       </>
     );
   }
